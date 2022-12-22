@@ -4,7 +4,7 @@ import sponsors from './api/sponsors.routes';
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
-  res.status(200).send('Main API Route');
+  res.send('Main API Route');
 });
 
 routes.use('/users', users);
