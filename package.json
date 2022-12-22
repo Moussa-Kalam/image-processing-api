@@ -1,0 +1,31 @@
+{
+  "name": "image-processing-api",
+  "version": "1.0.0",
+  "description": "Image Processing API",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "prettier": "prettier --config .prettierrc '**/*.js' --write"  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moussa-Kalam/image-processing-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "express",
+    "jasmine"
+  ],
+  "author": "Moussa Kalam AMZAT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moussa-Kalam/image-processing-api/issues"
+  },
+  "homepage": "https://github.com/Moussa-Kalam/image-processing-api#readme",
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1"
+  }
+}
