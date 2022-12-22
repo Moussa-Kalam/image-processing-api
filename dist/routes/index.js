@@ -8,7 +8,7 @@ const users_routes_1 = __importDefault(require("./api/users.routes"));
 const sponsors_routes_1 = __importDefault(require("./api/sponsors.routes"));
 const routes = express_1.default.Router();
 routes.get('/', (req, res) => {
-    res.send('Main API Route');
+    res.status(200).send('Main API Route');
 });
 routes.use('/users', users_routes_1.default);
 routes.use('/sponsors', sponsors_routes_1.default);
