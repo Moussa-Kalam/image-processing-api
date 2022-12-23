@@ -1,13 +1,11 @@
 import express from 'express';
-import users from './api/users.routes';
-import sponsors from './api/sponsors.routes';
+import images from './api/images.routes';
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
   res.send('Main API Route');
 });
 
-routes.use('/users', users);
-routes.use('/sponsors', sponsors);
+routes.use('/images', images);
 
 export default routes;
