@@ -17,8 +17,8 @@ const index_1 = __importDefault(require("../index"));
 const supertest_1 = __importDefault(require("supertest"));
 const request = (0, supertest_1.default)(index_1.default);
 describe('Test endpoint responses', () => {
-    it('should return 200 for GET /api', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/api');
+    it('should return 200 for GET /api/images', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/images');
         expect(response.status).toBe(200);
     }));
 });
