@@ -1,15 +1,16 @@
 import express from 'express';
 import { readFile } from 'fs';
+import path from 'path';
 
 // import sharp
 const sharp = require('sharp');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
+routes.get('/', (req: express.Request, res: express.Response) => {
   let filename = req.query.filename;
-  let width = req.query.width;
-  let height = req.query.height;
+  let width: number = Number(req.query.width);
+  let height: number = Number(req.query.height);
 
   const outputFilePath = `/src/uploads/images/thumbnails/${filename}.resized.jgp`;
 
@@ -17,22 +18,23 @@ routes.get('/', (req, res) => {
     if (err) {
       throw err;
     }
-    //   const resized = sharp(data).resize(width, height, {
-    //     withoutEnlargement: true,
-    //     fit: sharp.fit.cover,
-    //     background: { r: 255, g: 255, b: 255, alpha: 0 }
-
-    //   res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-    //   res.end(data);
-    // });
-
-    // resize image with sharp
-    sharp(data, width, height)
+    let resized = sharp(data)
       .resize(width, height)
       .toFile(
-        `uploads/images/thumbnails/${filename}resized.jpg`,
-        (err, data) => {}
+        path.join(
+          __dirname,
+          `../../uploads/images/thumbnails/${filename}-resized.jpg`
+        )
       );
+
+    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+
+    res.end(
+      path.join(
+        __dirname,
+        `../../uploads/images/thumbnails/${filename}-resized.jpg`
+      )
+    );
   });
 });
 
