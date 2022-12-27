@@ -5,29 +5,29 @@ const sharp = require('sharp');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
+routes.get('/', (req: express.Request, res: express.Response) => {
   let filename = req.query.filename;
   let width: number = Number(req.query.width);
   let height: number = Number(req.query.height);
 
-  readFile(`./src/uploads/images/full/${filename}`, (err, data) => {
+  readFile(`./src/uploads/images/full/${filename}`, async (err, data) => {
     if (err) {
       throw err;
     }
 
-    sharp(data)
+    await sharp(data)
       .resize(width, height)
       .toFile(
         path.join(
           __dirname,
-          `../../uploads/images/thumbnails/${filename}-resized.jpg`
+          `../../uploads/images/thumbnails/${filename}-${width}x${height}`
         )
       );
 
     res.sendFile(
       path.join(
         __dirname,
-        `../../uploads/images/thumbnails/${filename}-resized.jpg`
+        `../../uploads/images/thumbnails/${filename}-${width}x${height}`
       )
     );
     return;
