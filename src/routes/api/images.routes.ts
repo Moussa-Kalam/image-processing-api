@@ -10,8 +10,6 @@ routes.get('/', (req, res) => {
   let width: number = Number(req.query.width);
   let height: number = Number(req.query.height);
 
-  const outputFilePath = `/src/uploads/images/thumbnails/${filename}.resized.jgp`;
-
   readFile(`./src/uploads/images/full/${filename}`, (err, data) => {
     if (err) {
       throw err;
