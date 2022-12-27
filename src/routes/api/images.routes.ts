@@ -1,13 +1,11 @@
 import express from 'express';
 import { readFile } from 'fs';
 import path from 'path';
-
-// import sharp
 const sharp = require('sharp');
 
 const routes = express.Router();
 
-routes.get('/', (req: express.Request, res: express.Response) => {
+routes.get('/', (req, res) => {
   let filename = req.query.filename;
   let width: number = Number(req.query.width);
   let height: number = Number(req.query.height);
@@ -18,7 +16,8 @@ routes.get('/', (req: express.Request, res: express.Response) => {
     if (err) {
       throw err;
     }
-    let resized = sharp(data)
+
+    sharp(data)
       .resize(width, height)
       .toFile(
         path.join(
@@ -27,14 +26,13 @@ routes.get('/', (req: express.Request, res: express.Response) => {
         )
       );
 
-    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-
-    res.end(
+    res.sendFile(
       path.join(
         __dirname,
         `../../uploads/images/thumbnails/${filename}-resized.jpg`
       )
     );
+    return;
   });
 });
 
