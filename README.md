@@ -13,7 +13,7 @@ Rather than needing to resize and upload multiple copies of the same image to be
 
 - To run the express server, run `npm run start`
 
-- To test the created functionality, access the endpoint localhost:8000:
+- To test the created functionality, access the endpoint localhost:8000
 
   Example: [http://localhost:8000/api/images?filename=santamonica.jpg&width=200&height=200](http://localhost:8000/api/images?filename=santamonica.jpg&width=200&height=200)
 
