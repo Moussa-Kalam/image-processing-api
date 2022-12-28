@@ -9,9 +9,7 @@ Rather than needing to resize and upload multiple copies of the same image to be
 
 ## More information
 
-- To compile the TypeScript code into JavaScript, run npm run build
-
-- To test the API with Jasmine, run `npm run test`
+- To compile the TypeScript code into JavaScript, run `npm run build`
 
 - To run the express server, run `npm run start`
 
