@@ -5,10 +5,11 @@ const sharp = require('sharp');
 
 const routes = express.Router();
 
-routes.get('/', (req: express.Request, res: express.Response) => {
+routes.get('/', (req, res) => {
   let filename = req.query.filename;
   let width: number = Number(req.query.width);
   let height: number = Number(req.query.height);
+
 
   readFile(`./src/uploads/images/full/${filename}`, async (err, data) => {
     if (err) {
@@ -20,14 +21,14 @@ routes.get('/', (req: express.Request, res: express.Response) => {
       .toFile(
         path.join(
           __dirname,
-          `../../uploads/images/thumbnails/${filename}-${width}x${height}`
+          `../../uploads/images/thumbnails/${filename}-${width}x${height}.jpg`
         )
       );
 
     res.sendFile(
       path.join(
         __dirname,
-        `../../uploads/images/thumbnails/${filename}-${width}x${height}`
+        `../../uploads/images/thumbnails/${filename}-${width}x${height}.jpg`
       )
     );
     return;
