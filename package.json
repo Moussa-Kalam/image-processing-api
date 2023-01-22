@@ -4,8 +4,8 @@
   "description": "Image Processing API",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --ext .js",
-    "prettier": "prettier --config .prettierrc '**/*.js' --write",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write", 
     "build": "npx tsc",
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine",

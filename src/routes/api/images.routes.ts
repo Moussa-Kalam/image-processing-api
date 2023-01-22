@@ -1,21 +1,66 @@
-import express from 'express';
-import { readFile } from 'fs';
+import express, { Request, Response } from 'express';
+import fs, { fstat, readFile } from 'fs';
 import path from 'path';
 const sharp = require('sharp');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-  let filename = req.query.filename;
+routes.get('/', async (req: Request, res: Response): Promise<unknown> => {
+  let filename: string = req.query.filename as string;
   let width: number = Number(req.query.width);
   let height: number = Number(req.query.height);
 
+  // Checking if the user input value for the width and height
+  if (
+    Number.isNaN(width) ||
+    Number.isNaN(height) ||
+    width <= 0 ||
+    height <= 0
+  ) {
+    return res.send(`Invalid input. Please check width and height!
+      Must be a number and greater than 0!
+      `);
+  }
+
+  // Checking if the file exists before processing
+  if (
+    !filename ||
+    filename === '' ||
+    !fs.existsSync(
+      path.join(__dirname, `../../uploads/images/full/${filename}`)
+    )
+  ) {
+    return res.send('Please provide a valid filename!');
+  }
+
+  // Ensuring the user provides values for width and height
+  if (!width || !height) {
+    return res.send('Please ensure you provided a width and a height.');
+  }
 
   readFile(`./src/uploads/images/full/${filename}`, async (err, data) => {
     if (err) {
       throw err;
     }
 
+    // Caching: Returns the file if previously processed
+    if (
+      fs.existsSync(
+        path.join(
+          __dirname,
+          `../../uploads/images/thumbnails/${filename}-${width}x${height}.jpg`
+        )
+      )
+    ) {
+      return res.sendFile(
+        path.join(
+          __dirname,
+          `../../uploads/images/thumbnails/${filename}-${width}x${height}.jpg`
+        )
+      );
+    }
+
+    // Resizing functionality
     await sharp(data)
       .resize(width, height)
       .toFile(
