@@ -17,9 +17,7 @@ routes.get('/', async (req: Request, res: Response): Promise<unknown> => {
     width <= 0 ||
     height <= 0
   ) {
-    return res.send(`Invalid input. Please check width and height!
-      Must be a number and greater than 0!
-      `);
+    return res.send(`Invalid input. Please check width and height!`);
   }
 
   // Checking if the file exists before processing
