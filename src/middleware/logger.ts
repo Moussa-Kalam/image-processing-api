@@ -3,9 +3,10 @@ import express from 'express';
 const logger = (
   req: express.Request,
   res: express.Response,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   next: Function
 ): void => {
-  let url = req.url;
+  const url = req.url;
   console.log(`Request received for ${url}`);
   next();
 };

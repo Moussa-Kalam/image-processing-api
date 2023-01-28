@@ -1,14 +1,14 @@
 import express, { Request, Response } from 'express';
-import fs, { fstat, readFile } from 'fs';
+import fs, { readFile } from 'fs';
 import path from 'path';
-const sharp = require('sharp');
+import sharp from 'sharp';
 
 const routes = express.Router();
 
 routes.get('/', async (req: Request, res: Response): Promise<unknown> => {
-  let filename: string = req.query.filename as string;
-  let width: number = Number(req.query.width);
-  let height: number = Number(req.query.height);
+  const filename: string = req.query.filename as string;
+  const width = Number(req.query.width);
+  const height = Number(req.query.height);
 
   // Checking if the user input value for the width and height
   if (
