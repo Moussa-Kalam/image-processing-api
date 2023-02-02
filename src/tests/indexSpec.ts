@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import app from '../index';
 import supertest from 'supertest';
-import sharp from 'sharp';
 import fs from 'fs';
-import path from 'path';
 
 const request = supertest(app);
 
@@ -16,7 +14,6 @@ it('should return status 404 for GET /api/image', async () => {
   const res = await request.get('/api/image');
   expect(res.status).toBe(404);
 });
-
 
 describe('Image resizing functionality', () => {
   it('Should resize the image and return a resized image', async () => {
@@ -31,5 +28,3 @@ describe('Image resizing functionality', () => {
     });
   });
 });
-
-
